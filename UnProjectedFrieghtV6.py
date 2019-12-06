@@ -105,35 +105,38 @@ if scatterPlot == "true":
                      shade=True))  # kde = gausian Kernel density estimation of histogram, smaller dots
     columnsNamesdf_scatter = df_scatter.columns.values  # print(columnsNamesdf_scatter)
     # scatter plots
-    ivv = 0
-    while ivv < len(columnsNamesdf_scatter) - 2:
-        ivv = ivv + 1
-        x = df_scatter[columnsNamesdf_scatter[ivv]]
-        y = df_scatter[columnsNamesdf_scatter[ivv + 1]]
-        fit = polyfit(x, y, 1)
-        fit_fn = poly1d(fit)
-        plt.figure()
-        plt.plot(x, y, '+', x, fit_fn(x), 'k', markersize=3)  # 'k' = black line
-        plt.title(columnsNamesdf_scatter[ivv + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[
-            ivv] + ' + ' + str("% .4e" % fit_fn[0]))
-        plt.xlabel(columnsNamesdf_scatter[ivv])
-        plt.ylabel(columnsNamesdf_scatter[ivv + 1])
+    xIterator = 0
+    while xIterator < len(columnsNamesdf_scatter) - 2:
+        xIterator = xIterator + 1
+        x = df_scatter[columnsNamesdf_scatter[xIterator]]
+        yIterator = len(columnsNamesdf_scatter)
+        while yIterator > xIterator + 1:
+            yIterator = yIterator - 1
+            y = df_scatter[columnsNamesdf_scatter[yIterator]]
+            fit = polyfit(x, y, 1)
+            fit_fn = poly1d(fit)
+            plt.figure()
+            plt.plot(x, y, '+', x, fit_fn(x), 'k', markersize=3)  # 'k' = black line
+            plt.title(columnsNamesdf_scatter[xIterator + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[
+                xIterator] + ' + ' + str("% .4e" % fit_fn[0]))
+            plt.xlabel(columnsNamesdf_scatter[xIterator])
+            plt.ylabel(columnsNamesdf_scatter[yIterator])
         # plt.show()
     # Histograms
     ivv = 0
-    while ivv < len(columnsNamesdf_scatter) - 1:
-        ivv = ivv + 1
+    while xIterator < len(columnsNamesdf_scatter) - 1:
+        xIterator = xIterator + 1
         plt.figure()
-        df_scatter[columnsNamesdf_scatter[ivv]].hist(bins=50)
-        plt.xlabel(columnsNamesdf_scatter[ivv])
+        df_scatter[columnsNamesdf_scatter[xIterator]].hist(bins=50)
+        plt.xlabel(columnsNamesdf_scatter[xIterator])
         # plt.show()
     # data in sequence
     ivv = 0
-    while ivv < len(columnsNamesdf_scatter) - 1:
-        ivv = ivv + 1
+    while xIterator < len(columnsNamesdf_scatter) - 1:
+        xIterator = xIterator + 1
         plt.figure()
-        plt.plot(df_scatter[columnsNamesdf_scatter[ivv]], '+', markersize=3)
-        plt.ylabel(columnsNamesdf_scatter[ivv])
+        plt.plot(df_scatter[columnsNamesdf_scatter[xIterator]], '+', markersize=3)
+        plt.ylabel(columnsNamesdf_scatter[xIterator])
         # plt.show()
     plt.show();
 else:
