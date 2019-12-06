@@ -114,16 +114,18 @@ if scatterPlot == "true":
             yIterator = yIterator - 1
             y = df_scatter[columnsNamesdf_scatter[yIterator]]
             fit = polyfit(x, y, 1)
+            rSquared = np.corrcoef(x, y)[0, 1] * np.corrcoef(x, y)[0, 1]
             fit_fn = poly1d(fit)
             plt.figure()
             plt.plot(x, y, '+', x, fit_fn(x), 'k', markersize=3)  # 'k' = black line
             plt.title(columnsNamesdf_scatter[xIterator + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[
                 xIterator] + ' + ' + str("% .4e" % fit_fn[0]))
+            plt.suptitle('R squared = ' + str(rSquared))
             plt.xlabel(columnsNamesdf_scatter[xIterator])
             plt.ylabel(columnsNamesdf_scatter[yIterator])
         # plt.show()
     # Histograms
-    ivv = 0
+    xIterator = 0
     while xIterator < len(columnsNamesdf_scatter) - 1:
         xIterator = xIterator + 1
         plt.figure()
@@ -131,7 +133,7 @@ if scatterPlot == "true":
         plt.xlabel(columnsNamesdf_scatter[xIterator])
         # plt.show()
     # data in sequence
-    ivv = 0
+    xIterator = 0
     while xIterator < len(columnsNamesdf_scatter) - 1:
         xIterator = xIterator + 1
         plt.figure()
