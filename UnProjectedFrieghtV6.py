@@ -61,6 +61,7 @@ import pandas as pd
 from pandas import DataFrame
 import pickle
 import random
+import ModifyData
 
 scatterPlot = "false"
 scatterPlot = "true"
@@ -75,21 +76,18 @@ print('df_Train pre filter')
 print(df_Train.shape)
 
 # add density
-isdf_fltrx = df_Train["CUBE_PCT"] >= 0.00001  # No cube % < .00001%
-df_Train = df_Train[isdf_fltrx]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "CUBE_PCT", 0.00001, ">=")]
 df_Train['Density'] = df_Train["WGT_LBS"] / df_Train["CUBE_PCT"]  # add a column Density
+df_Train_column_names = df_Train.columns.values
 
 # Filter data by value
-isdf_fltr = df_Train["CUBE_PCT"] <= 120.  # No cube % > 100%
-df_Train = df_Train[isdf_fltr]
-isdf_fltr = df_Train["WGT_LBS"] <= 23000.
-df_Train = df_Train[isdf_fltr]
-isdf_fltr = df_Train["WGT_LBS"] >= 1.0
-df_Train = df_Train[isdf_fltr]
-isdf_fltr = df_Train["PUR_SEQ_NBR"] <= 15.
-df_Train = df_Train[isdf_fltr]
-isdf_fltr = df_Train["Density"] <= 2500.
-df_Train = df_Train[isdf_fltr]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "CUBE_PCT", 120, "<=")] # No cube % > 100%
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "WGT_LBS", 23000, "<=")]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "WGT_LBS", 1.0, ">=")]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "PUR_SEQ_NBR", 15., "<=")]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "Density", 2500., "<=")]
+
+df_Train = ModifyData.add_numeric_alpha_alphanum_tests(df_Train, df_Train_column_names)
 
 print('df_Train post filter')
 print(df_Train.shape)
@@ -118,7 +116,7 @@ if scatterPlot == "true":
             fit_fn = poly1d(fit)
             plt.figure()
             plt.plot(x, y, '+', x, fit_fn(x), 'k', markersize=3)  # 'k' = black line
-            plt.title('Sequential Histogram ' + columnsNamesdf_scatter[xIterator + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[
+            plt.title(columnsNamesdf_scatter[xIterator + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[
                 xIterator] + ' + ' + str("% .4e" % fit_fn[0]))
             plt.suptitle('R squared = ' + str(rSquared))
             plt.xlabel(columnsNamesdf_scatter[xIterator])
@@ -131,6 +129,7 @@ if scatterPlot == "true":
         plt.figure()
         df_scatter[columnsNamesdf_scatter[xIterator]].hist(bins=50)
         plt.xlabel(columnsNamesdf_scatter[xIterator])
+        plt.title('Histogram')
         # plt.show()
     # data in sequence
     xIterator = 0
@@ -139,8 +138,9 @@ if scatterPlot == "true":
         plt.figure()
         plt.plot(df_scatter[columnsNamesdf_scatter[xIterator]], '+', markersize=3)
         plt.ylabel(columnsNamesdf_scatter[xIterator])
+        plt.title('Sequential')
         # plt.show()
-    plt.show();
+    plt.show()
 else:
 
     uniquedf = df_Train["ORIG_SIC_CD"].unique()  # find unique SICs
