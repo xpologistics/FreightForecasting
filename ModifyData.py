@@ -31,10 +31,14 @@ def filter_dataframe(dataframe, column_to_filter, value_restriction, filter_type
 def add_numeric_alpha_alphanum_tests(dataframe, dataframe_column_names):
     for column_name in dataframe_column_names:
         column_name_is_alphanumeric = column_name + "_is_alphanumeric"
-        dataframe[column_name_is_alphanumeric] = np.where(str(dataframe[column_name].values).isalnum(), True, False)
+        dataframe[column_name_is_alphanumeric] = dataframe[column_name].apply(lambda x: True if str(x).isalnum() else False)
         column_name_is_alpha = column_name + "_is_alpha"
-        dataframe[column_name_is_alpha] = np.where(str(dataframe[column_name].values).isalpha(), True, False)
+        dataframe[column_name_is_alpha] = dataframe[column_name].apply(lambda x: True if str(x).isalpha() else False)
         column_name_is_digit = column_name + "_is_digit"
-        dataframe[column_name_is_digit] = np.where(str(dataframe[column_name].values).isdigit(), True, False)
+        dataframe[column_name_is_digit] = dataframe[column_name].apply(lambda x: True if str(x).isdigit() else False)
     return dataframe
+
+
+def average_of_column(dataframe, column_to_average):
+    return dataframe[column_to_average].mean()
 
