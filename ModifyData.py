@@ -42,3 +42,4 @@ def add_numeric_alpha_alphanum_tests(dataframe, dataframe_column_names):
 def average_of_column(dataframe, column_to_average):
     return dataframe[column_to_average].mean()
 
+
