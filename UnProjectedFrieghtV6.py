@@ -116,6 +116,7 @@ if scatterPlot == "true":
     xIterator = 0
     PreparePlots.data_in_sequence(xIterator, columnsNamesdf_plots, df_plots)
     plt.show()
+    #print(ModifyData.average_of_column(df_plots, "WGT_LBS"))
 else:
 
     uniquedf = df_Train["ORIG_SIC_CD"].unique()  # find unique SICs
