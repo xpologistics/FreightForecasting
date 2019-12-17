@@ -32,7 +32,8 @@ def scatter_plots(xIterator, columnsNamesdf_scatter, df_scatter):
             plt.plot(x, y, '+', x, fit_fn(x), 'k', markersize=3)  # 'k' = black line
             plt.title(columnsNamesdf_scatter[xIterator + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[
                 xIterator] + ' + ' + str("% .4e" % fit_fn[0]))
-            plt.suptitle('R squared = ' + str(rSquared))
+            average = ModifyData.average_of_column(df_scatter, columnsNamesdf_scatter[yIterator])
+            plt.suptitle('R squared = ' + str(rSquared) + ' Average ' + columnsNamesdf_scatter[yIterator] + '= ' + str(average))
             plt.xlabel(columnsNamesdf_scatter[xIterator])
             plt.ylabel(columnsNamesdf_scatter[yIterator])
 

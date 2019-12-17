@@ -98,8 +98,8 @@ print(df_Train.shape)
 
 if scatterPlot == "true":
     # select data for the plot
-    df_plotstmp = df_Train.loc[:, ['PKUP_DT', 'WGT_LBS', 'CUBE_PCT', 'Density', 'PUR_SEQ_NBR']]
-    df_plots = df_plotstmp.sort_values(by='PKUP_DT')  # print(df_scatter)
+    df_plotstmp = df_Train.loc[:, ['WGT_LBS', 'CUBE_PCT', 'Density', 'PUR_SEQ_NBR']]
+    df_plots = df_plotstmp.sort_values(by='WGT_LBS')  # print(df_scatter)
     # Super plot
     sns.pairplot(df_plots, diag_kind="kde", markers="+",
                  plot_kws=dict(s=10, edgecolor="b", linewidth=1),
@@ -107,13 +107,13 @@ if scatterPlot == "true":
                      shade=True))  # kde = gausian Kernel density estimation of histogram, smaller dots
     columnsNamesdf_plots = df_plots.columns.values  # print(columnsNamesdf_scatter)
     # scatter plots
-    xIterator = 0
+    xIterator = -1
     PreparePlots.scatter_plots(xIterator, columnsNamesdf_plots, df_plots)
     # Histograms
-    xIterator = 0
+    xIterator = -1
     PreparePlots.histograms(xIterator, columnsNamesdf_plots, df_plots)
     # data in sequence
-    xIterator = 0
+    xIterator = -1
     PreparePlots.data_in_sequence(xIterator, columnsNamesdf_plots, df_plots)
     plt.show()
     #print(ModifyData.average_of_column(df_plots, "WGT_LBS"))
