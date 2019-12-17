@@ -40,6 +40,9 @@ def add_numeric_alpha_alphanum_tests(dataframe, dataframe_column_names):
 
 
 def average_of_column(dataframe, column_to_average):
-    return dataframe[column_to_average].mean()
+    return round(dataframe[column_to_average].mean(), 2)
 
+
+def standard_deviation_of_column(dataframe, column_to_average):
+    return round(dataframe[column_to_average].std(), 2)
 
