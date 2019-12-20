@@ -37,6 +37,8 @@ df_Train_column_names = df_Train.columns.values
 print('df_Train post filter')
 print(df_Train.shape)
 
+
+
 if scatterPlot == "true":
     # select data for the plot
     df_plotstmp = df_Train.loc[:, [' SHPMT_CORR_REV', ' AMC_IND', ' DENSITY']]
@@ -47,6 +49,8 @@ if scatterPlot == "true":
                  diag_kws=dict(
                      shade=True))  # kde = gausian Kernel density estimation of histogram, smaller dots
     columnsNamesdf_plots = df_plots.columns.values  # print(columnsNamesdf_scatter)
+    df_outliers = ModifyData.outlier_calculation(df_plots, ' DENSITY')
+    print(df_outliers[' DENSITY_outlier'].min())
     # scatter plots
     xIterator = -1
     PreparePlots.scatter_plots(xIterator, columnsNamesdf_plots, df_plots)
