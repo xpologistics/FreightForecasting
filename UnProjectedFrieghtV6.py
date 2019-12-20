@@ -166,8 +166,7 @@ else:
             df_in = df_in.iloc[:, 0].values.reshape(-1,
                                                     1)  # a "2-D" single column of inputs for input to regression
             df_out = DataFrame(df_out, columns=['x_test_values'])  # a dataframe for input to regression
-            df_out = df_out.iloc[:, 0].values.reshape(-1,
-                                                      1)  # a "2-D" single column of inputs for input to regression
+            df_out = df_out.iloc[:, 0].values.reshape(-1,1)  # a "2-D" single column of inputs for input to regression
             # print(df_in) #print(df_out)
 
             # fit each model
