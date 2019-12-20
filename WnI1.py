@@ -20,6 +20,8 @@ import pandas as pd
 from pandas import DataFrame
 import pickle
 import random
+import ModifyData
+
 scatterPlot = "true"
 # Read in the complete data set
 #df_Train = pd.read_csv("C:\\Conway\\Unprojected_Freight\\2019\\lho_shipment_inpt.csv")
@@ -31,8 +33,9 @@ print(columnsNamesArr)
 print('df_Train pre filter')
 print(df_Train.shape)
 # Filter data by value
-isdf_fltr = df_Train["SHIPPER_LNGT"] <= -60.               # No cube % > 100%
-df_Train = df_Train[isdf_fltr]
+#isdf_fltr = df_Train["SHIPPER_LNGT"] <= -60.               # No cube % > 100%
+#df_Train = df_Train[isdf_fltr]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "SHIPPER_LNGT", "<=", -60)]
 isdf_fltr = df_Train["SHIPPER_LNGT"] >= -125.  
 df_Train = df_Train[isdf_fltr]
 isdf_fltr = df_Train["SHIPPER_LATD"] <= 50          

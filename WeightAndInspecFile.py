@@ -52,12 +52,9 @@ if scatterPlot == "true":
     df_outliers = ModifyData.outlier_calculation(df_plots, ' DENSITY')
     print(df_outliers[' DENSITY_outlier'].min())
     # scatter plots
-    xIterator = -1
-    PreparePlots.scatter_plots(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.scatter_plots(columnsNamesdf_plots, df_plots)
     # Histograms
-    xIterator = -1
-    PreparePlots.histograms(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.histograms(columnsNamesdf_plots, df_plots)
     # data in sequence
-    xIterator = -1
-    PreparePlots.data_in_sequence(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.data_in_sequence(columnsNamesdf_plots, df_plots)
     plt.show()

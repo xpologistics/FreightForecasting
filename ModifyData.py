@@ -16,7 +16,7 @@ import pickle
 import random
 
 
-def filter_dataframe(dataframe, column_to_filter, value_restriction, filter_type):
+def filter_dataframe(dataframe, column_to_filter, filter_type, value_restriction):
     if filter_type == "<=":
         dataframe = dataframe[column_to_filter] <= value_restriction
     elif filter_type == ">=":
