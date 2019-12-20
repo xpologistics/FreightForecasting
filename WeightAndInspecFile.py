@@ -48,12 +48,9 @@ if scatterPlot == "true":
                      shade=True))  # kde = gausian Kernel density estimation of histogram, smaller dots
     columnsNamesdf_plots = df_plots.columns.values  # print(columnsNamesdf_scatter)
     # scatter plots
-    xIterator = -1
-    PreparePlots.scatter_plots(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.scatter_plots(columnsNamesdf_plots, df_plots)
     # Histograms
-    xIterator = -1
-    PreparePlots.histograms(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.histograms(columnsNamesdf_plots, df_plots)
     # data in sequence
-    xIterator = -1
-    PreparePlots.data_in_sequence(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.data_in_sequence(columnsNamesdf_plots, df_plots)
     plt.show()

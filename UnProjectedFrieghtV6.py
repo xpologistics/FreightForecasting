@@ -80,16 +80,16 @@ print('df_Train pre filter')
 print(df_Train.shape)
 
 # add density
-df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "CUBE_PCT", 0.00001, ">=")]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "CUBE_PCT", ">=", 0.00001)]
 df_Train['Density'] = df_Train["WGT_LBS"] / df_Train["CUBE_PCT"]  # add a column Density
 df_Train_column_names = df_Train.columns.values
 
 # Filter data by value
-df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "CUBE_PCT", 120, "<=")] # No cube % > 100%
-df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "WGT_LBS", 23000, "<=")]
-df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "WGT_LBS", 1.0, ">=")]
-df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "PUR_SEQ_NBR", 15., "<=")]
-df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "Density", 2500., "<=")]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "CUBE_PCT", "<=", 120)] # No cube % > 100%
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "WGT_LBS", "<=", 23000)]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "WGT_LBS", ">=", 1.0)]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "PUR_SEQ_NBR", "<=", 15.)]
+df_Train = df_Train[ModifyData.filter_dataframe(df_Train, "Density", "<=", 2500.)]
 
 df_Train = ModifyData.add_numeric_alpha_alphanum_tests(df_Train, df_Train_column_names)
 
@@ -107,14 +107,11 @@ if scatterPlot == "true":
                      shade=True))  # kde = gausian Kernel density estimation of histogram, smaller dots
     columnsNamesdf_plots = df_plots.columns.values  # print(columnsNamesdf_scatter)
     # scatter plots
-    xIterator = -1
-    PreparePlots.scatter_plots(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.scatter_plots(columnsNamesdf_plots, df_plots)
     # Histograms
-    xIterator = -1
-    PreparePlots.histograms(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.histograms(columnsNamesdf_plots, df_plots)
     # data in sequence
-    xIterator = -1
-    PreparePlots.data_in_sequence(xIterator, columnsNamesdf_plots, df_plots)
+    PreparePlots.data_in_sequence(columnsNamesdf_plots, df_plots)
     plt.show()
     #print(ModifyData.average_of_column(df_plots, "WGT_LBS"))
 else:

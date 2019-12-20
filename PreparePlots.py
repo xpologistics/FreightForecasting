@@ -17,8 +17,9 @@ import random
 import ModifyData
 
 
-def scatter_plots(xIterator, columnsNamesdf_scatter, df_scatter):
-    while xIterator < len(columnsNamesdf_scatter) - 2:
+def scatter_plots(columnsNamesdf_scatter, df_scatter):
+    xIterator = -1
+    while xIterator < len(columnsNamesdf_scatter) - 2: # Using the -2 to only show the graphs in the bottom diagonal of the x by x grid of graphs
         xIterator = xIterator + 1
         x = df_scatter[columnsNamesdf_scatter[xIterator]]
         yIterator = len(columnsNamesdf_scatter)
@@ -39,7 +40,8 @@ def scatter_plots(xIterator, columnsNamesdf_scatter, df_scatter):
             plt.ylabel(columnsNamesdf_scatter[yIterator])
 
 
-def histograms(xIterator, columnsNamesdf_histogram, df_histogram):
+def histograms(columnsNamesdf_histogram, df_histogram):
+    xIterator = -1
     while xIterator < len(columnsNamesdf_histogram) - 1:
         xIterator = xIterator + 1
         plt.figure()
@@ -48,7 +50,8 @@ def histograms(xIterator, columnsNamesdf_histogram, df_histogram):
         plt.title('Histogram')
 
 
-def data_in_sequence(xIterator, columnsNamesdf_sequence, df_sequence):
+def data_in_sequence(columnsNamesdf_sequence, df_sequence):
+    xIterator = -1
     while xIterator < len(columnsNamesdf_sequence) - 1:
         xIterator = xIterator + 1
         plt.figure()
