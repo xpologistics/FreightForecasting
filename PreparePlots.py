@@ -30,9 +30,9 @@ def scatter_plots(columnsNamesdf_scatter, df_scatter):
             rSquared = round(np.corrcoef(x, y)[0, 1] * np.corrcoef(x, y)[0, 1], 3)
             fit_fn = poly1d(fit)
             plt.figure()
-            plt.plot(x, y, '+', x, fit_fn(x), 'k', markersize=3)  # 'k' = black line
-            plt.title(columnsNamesdf_scatter[xIterator + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[
-                xIterator] + ' + ' + str("% .4e" % fit_fn[0]))
+            plt.plot(x, y, '+', x, fit_fn(x), 'k', markersize=0.5)  # 'k' = black line
+            #plt.title(columnsNamesdf_scatter[xIterator + 1] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[xIterator] + ' + ' + str("% .4e" % fit_fn[0]))
+            plt.title(columnsNamesdf_scatter[yIterator] + ' = ' + str("% .4e" % fit_fn[1]) + ' * ' + columnsNamesdf_scatter[xIterator] + ' + ' + str("% .4e" % fit_fn[0]))
             average = ModifyData.average_of_column(df_scatter, columnsNamesdf_scatter[yIterator])
             standard_deviation = ModifyData.standard_deviation_of_column(df_scatter, columnsNamesdf_scatter[yIterator])
             plt.suptitle('R squared = ' + str(rSquared) + ' Average ' + columnsNamesdf_scatter[yIterator] + '= ' + str(average) + ' Standard deviation = ' + str(standard_deviation))
@@ -55,7 +55,7 @@ def data_in_sequence(columnsNamesdf_sequence, df_sequence):
     while xIterator < len(columnsNamesdf_sequence) - 1:
         xIterator = xIterator + 1
         plt.figure()
-        plt.plot(df_sequence[columnsNamesdf_sequence[xIterator]], '+', markersize=3)
+        plt.plot(df_sequence[columnsNamesdf_sequence[xIterator]], '+', markersize=0.5)
         plt.ylabel(columnsNamesdf_sequence[xIterator])
         plt.title('Sequential')
 
