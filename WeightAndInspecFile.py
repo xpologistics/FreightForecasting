@@ -25,6 +25,8 @@ df_Train_column_names = df_Train.columns.values
 print('df_Train post filter')
 print(df_Train.shape)
 
+
+
 if scatterPlot == "true":
     # select data for the plot
     df_plots = df_Train.loc[:, ['SHIPMENT_VOLUMNE_CUBIC_FOOT','SIC_MILES','CNT_OF_SHIPMENTS_PA','MOTORIZED_PIECES_COUNT','SHIPMENT_WEIGHT','CNT_OF_CORRECTIONS_PA','SHIPPER_LATD','DENSITY','CORR_REVENUE_PA','PA_NAICS6','CONS_LATD','SHPMT_CORR_REV']]
@@ -37,6 +39,8 @@ if scatterPlot == "true":
     #df_plots = df_Train
     df_plots = df_plots.sample(n=100000) # plots get overloaded with 13MM rows
     columnsNamesdf_plots = df_plots.columns.values  # print(columnsNamesdf_scatter)
+    df_outliers = ModifyData.outlier_calculation(df_plots, ' DENSITY')
+    print(df_outliers[' DENSITY_outlier'].min())
     # scatter plots
     PreparePlots.scatter_plots(columnsNamesdf_plots, df_plots)
     # Histograms

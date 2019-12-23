@@ -46,3 +46,18 @@ def average_of_column(dataframe, column_to_average):
 def standard_deviation_of_column(dataframe, column_to_average):
     return round(dataframe[column_to_average].std(), 2)
 
+
+def standard_deviations_from_mean(mean, std_dev, value):
+    return abs(mean - value) / std_dev
+
+
+def outlier_calculation(dataframe, dataframe_column_name, outlier_sigma_count=3):
+    standard_deviation_test = standard_deviation_of_column(dataframe, dataframe_column_name)
+    average_test = average_of_column(dataframe, dataframe_column_name)
+    column_name_outliers = dataframe_column_name + "_outlier"
+    dataframe[column_name_outliers] = dataframe.apply(lambda row: abs(standard_deviations_from_mean(average_test, standard_deviation_test, row[dataframe_column_name])) >= outlier_sigma_count, axis = 1)
+    #dataframe_outliers = np.DataFrame()
+    #dataframe_outliers[dataframe_column_name] = dataframe[column_name_outliers].apply(lambda row: dataframe[dataframe_column_name] if dataframe[column_name_outliers] else 0)
+    return dataframe
+
+
