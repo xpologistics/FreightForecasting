@@ -4,6 +4,7 @@ matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
 import PreparePlots
+import ModifyData
 
 scatterPlot = "true"
 
